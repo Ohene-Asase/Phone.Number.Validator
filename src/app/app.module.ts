@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './layouts/shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpRequestInterceptor } from './layouts/shared/http.interceptor';
-
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -23,7 +23,9 @@ import { HttpRequestInterceptor } from './layouts/shared/http.interceptor';
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    ToastrModule.forRoot(),
+    HttpClientModule,
+  
   ],
   providers: [
     {

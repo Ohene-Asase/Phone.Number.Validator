@@ -8,11 +8,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CountryComponent } from '../country/country.component';
 
 
+
 @NgModule({
   declarations: [
     HomeComponent,
     CardComponent,
-    CountryComponent
+    CountryComponent,
+  
   ],
   imports: [
     CommonModule,

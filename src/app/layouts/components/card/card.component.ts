@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { forkJoin, Subscription } from 'rxjs';
 import { Country } from 'src/app/models/validation.model';
+import { NotificationService } from 'src/app/services/notification.service';
 import { NumberValidatorService } from 'src/app/services/number-validator.service';
 
 
@@ -18,9 +20,10 @@ export class CardComponent implements OnInit {
   filteredSupportedCountries?: Country[] = [];
   allCountries?: Country[] = [];
   supportedCountriesObject: any;
-
   constructor(private fb: FormBuilder,
-              private phoneService: NumberValidatorService
+              private phoneService: NumberValidatorService,
+              private toaster: NotificationService,
+              private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -35,11 +38,20 @@ export class CardComponent implements OnInit {
   sendPhoneNumberForValidation(param: any): void{
     this.phoneService.verifyNumber(param)
     .subscribe((data)=> {
-      let results = data
+       let results = data
+      if(results.valid){
+        this.toaster.showSucess('Number is Valid') 
+        this.goToDetails(results)
+      }
+      else{
+        results.error? this.toaster.showErrow(results.error?.info): this.toaster.showErrow('Number is invalid');
+      }
     })
+  }
 
-   console.log(param.number);
- 
+  goToDetails(res: any): void{
+    localStorage.setItem('details', JSON.stringify(res))
+    this.router.navigate(["number-details"])
   }
 
   fetchCountries(): void{
@@ -48,7 +60,7 @@ export class CardComponent implements OnInit {
       this.phoneService.getCountries(),
        this.phoneService.getSupportedCountries(),
     ]).subscribe((res)=> {
-     console.log(res);
+    //  console.log(res);
      this.allCountries = res[0];
      this.supportedCountriesObject = res[1];
      this.getSupportedCountries();
@@ -67,11 +79,9 @@ export class CardComponent implements OnInit {
 
   getSupportedCountries(): void{
     const supportedCountries = Object.keys(this.supportedCountriesObject);
-    console.log(supportedCountries)
     this.filteredSupportedCountries = this.allCountries?.filter((country: any)=> 
       supportedCountries.some((s)=> s===country.alpha2Code)
     );
-    console.log(this.filteredSupportedCountries)
     this.staticCountries = this.filteredSupportedCountries
     
   }

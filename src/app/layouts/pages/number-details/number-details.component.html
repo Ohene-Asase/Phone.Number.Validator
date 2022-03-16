@@ -1,0 +1,24 @@
+<div class="main">
+    <div class="container ">
+        <h4 class="mt-3 text-color text-center mb-4">Phone Number Details</h4>
+        <div class="d-flex justify-content-center">
+        <mat-card>
+            <mat-card-header>
+                <img  src="../../../../assets/images/undraw_profile_data_re_v81r.svg"  style="width: 30rem;"    alt="">
+            </mat-card-header>
+            <mat-card-content class="mt-3">
+                <p> Carrier: {{details.carrier}}</p>
+                <p>Country code: {{details.country_code}}</p>
+                <p>Country Name: {{details.country_name}}</p>
+                <p>Country-Prefix: {{details.country_prefix}}</p>
+                <p>International Format: {{details.international_format}}</p>
+                <p>Local Format: {{details.local_format}}</p>
+                <p>Line Type: {{details.line_type}}</p>
+              
+            </mat-card-content>
+        </mat-card>
+        
+        </div>
+        <p class="mleft mt-3"><a routerLink="/home"> Go back </a></p>
+    </div>
+</div>

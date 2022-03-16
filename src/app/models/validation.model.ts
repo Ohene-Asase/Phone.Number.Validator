@@ -1,4 +1,5 @@
 export interface ValidationResponse{
+    info:object;
     valid: string,
     number: string,
     local_format: string,
@@ -8,7 +9,15 @@ export interface ValidationResponse{
     country_name: string,
     location: string,
     carrier: string,
-    line_type: string
+    line_type: string,
+    error: Error,
+    
+}
+
+export interface Error{
+    code: number,
+    type: string,
+    info: string
 }
 
 export interface ValidationRequest{
