@@ -52,4 +52,4 @@ jobs:
         with:
           app-name: 'Phone-Number-Validator'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_30CE0FF936524F818D1918502509ADF8 }}
-          package: .
+          package: ./dist/Phone-Number-Validator
