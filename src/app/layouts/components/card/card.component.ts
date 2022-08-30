@@ -32,14 +32,13 @@ export class CardComponent implements OnInit {
     // this.fetchCountries();
     // this.fetchSupportedCountries();
     this.fetchCountries();
-    this.getCountries();
+    
     
   }
  
   getCountries(){
   this.countriess = this.phoneService.get().subscribe((data) => {
     this.countriess = data
-    console.log(this.countriess)
   })
  
   }
