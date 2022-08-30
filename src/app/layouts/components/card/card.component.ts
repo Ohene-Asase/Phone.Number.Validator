@@ -20,6 +20,7 @@ export class CardComponent implements OnInit {
   filteredSupportedCountries?: Country[] = [];
   allCountries?: Country[] = [];
   supportedCountriesObject: any;
+  countriess: any
   constructor(private fb: FormBuilder,
               private phoneService: NumberValidatorService,
               private toaster: NotificationService,
@@ -31,10 +32,17 @@ export class CardComponent implements OnInit {
     // this.fetchCountries();
     // this.fetchSupportedCountries();
     this.fetchCountries();
+    this.getCountries();
     
   }
  
-
+  getCountries(){
+  this.countriess = this.phoneService.get().subscribe((data) => {
+    this.countriess = data
+    console.log(this.countriess)
+  })
+ 
+  }
   sendPhoneNumberForValidation(param: any): void{
     this.phoneService.verifyNumber(param)
     .subscribe((data)=> {
@@ -58,7 +66,7 @@ export class CardComponent implements OnInit {
    this.subscriptions.push(
     forkJoin([
       this.phoneService.getCountries(),
-       this.phoneService.getSupportedCountries(),
+       this.phoneService.get(),
     ]).subscribe((res)=> {
     //  console.log(res);
      this.allCountries = res[0];
