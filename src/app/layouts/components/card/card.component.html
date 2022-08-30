@@ -24,7 +24,7 @@
         <mat-label>Telephone</mat-label>
         <input type="tel" matInput formControlName="number">
       </mat-form-field>
-      <button type="submit" id="btn-test" class="btn btn-color">Submit</button>
+      <button type="submit" id="btn-test" class="btn btn-color" [disabled]="!validatorForm.valid">Submit</button>
     </form>
   </mat-card-content>
 </mat-card>
