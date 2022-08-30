@@ -10,7 +10,7 @@
       (ngSubmit)="sendPhoneNumberForValidation(validatorForm.value)">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Select Country Code</mat-label>
-        <mat-select formControlName="country_code">
+        <mat-select formControlName="country_code" required>
           <mat-option *ngFor="let country of filteredSupportedCountries" [value]="country.alpha2Code">
             <app-country [callingCode]="country.callingCodes[0]" [flagUrl]="country.flags.png"
               [countryName]="country.name">
@@ -22,7 +22,7 @@
       </mat-form-field>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Telephone</mat-label>
-        <input type="tel" matInput formControlName="number">
+        <input type="tel" matInput formControlName="number" required>
       </mat-form-field>
       <button type="submit" id="btn-test" class="btn btn-color" [disabled]="!validatorForm.valid">Submit</button>
     </form>
